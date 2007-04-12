@@ -1,0 +1,61 @@
+%define modname event
+%define dirname %{modname}
+%define soname %{modname}.so
+%define inifile A35_%{modname}.ini
+
+Summary:	Event Scheduling Engine for PHP
+Name:		php-%{modname}
+Version:	0.9.1
+Release:	%mkrel 9
+Group:		Development/PHP
+License:	PHP License
+URL:		http://pecl.php.net/package/event
+Source0:	event-%{version}.tar.bz2
+BuildRequires:	php-devel >= 3:5.2.0
+Provides:	php5-event
+Obsoletes:	php5-event
+Epoch:		1
+BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
+
+%description
+This is an extension to efficiently schedule IO, time and signal based events
+using the best available IO notification mechanism for your system. This is a
+port of libevent to the PHP infrastructure; the API is similar but not
+identical.
+
+%prep
+
+%setup -q -n event-%{version}
+
+%build
+
+phpize
+%configure2_5x --with-libdir=%{_lib} \
+    --with-%{modname}=shared,%{_prefix}
+
+%make
+mv modules/*.so .
+
+%install
+[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+
+install -d %{buildroot}%{_libdir}/php/extensions
+install -d %{buildroot}%{_sysconfdir}/php.d
+
+install -m755 %{soname} %{buildroot}%{_libdir}/php/extensions/
+
+cat > %{buildroot}%{_sysconfdir}/php.d/%{inifile} << EOF
+extension = %{soname}
+EOF
+
+%clean
+[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+[ "../package.xml" != "/" ] && rm -f ../package.xml
+
+%files 
+%defattr(-,root,root)
+%doc CREDITS
+%attr(0644,root,root) %config(noreplace) %{_sysconfdir}/php.d/%{inifile}
+%attr(0755,root,root) %{_libdir}/php/extensions/%{soname}
+
+
