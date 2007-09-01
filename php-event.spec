@@ -6,7 +6,7 @@
 Summary:	Event Scheduling Engine for PHP
 Name:		php-%{modname}
 Version:	0.9.1
-Release:	%mkrel 11
+Release:	%mkrel 12
 Group:		Development/PHP
 License:	PHP License
 URL:		http://pecl.php.net/package/event
@@ -26,15 +26,7 @@ identical.
 %setup -q -n event-%{version}
 
 %build
-export CFLAGS="%{optflags}"
-export CXXFLAGS="%{optflags}"
-export FFLAGS="%{optflags}"
-
-%if %mdkversion >= 200710
-export CFLAGS="$CFLAGS -fstack-protector"
-export CXXFLAGS="$CXXFLAGS -fstack-protector"
-export FFLAGS="$FFLAGS -fstack-protector"
-%endif
+%serverbuild
 
 phpize
 %configure2_5x --with-libdir=%{_lib} \
