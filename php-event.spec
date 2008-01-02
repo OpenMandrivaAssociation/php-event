@@ -13,6 +13,7 @@ URL:		http://pecl.php.net/package/event
 Source0:	event-%{version}.tar.bz2
 BuildRequires:	php-devel >= 3:5.2.0
 Epoch:		1
+BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 This is an extension to efficiently schedule IO, time and signal based events
