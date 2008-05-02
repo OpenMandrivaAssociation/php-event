@@ -6,14 +6,14 @@
 Summary:	Event Scheduling Engine for PHP
 Name:		php-%{modname}
 Version:	0.9.1
-Release:	%mkrel 14
+Release:	%mkrel 15
 Group:		Development/PHP
 License:	PHP License
 URL:		http://pecl.php.net/package/event
 Source0:	event-%{version}.tar.bz2
 BuildRequires:	php-devel >= 3:5.2.0
 Epoch:		1
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 This is an extension to efficiently schedule IO, time and signal based events
