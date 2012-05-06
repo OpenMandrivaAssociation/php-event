@@ -11,6 +11,7 @@ Group:		Development/PHP
 License:	PHP License
 URL:		http://pecl.php.net/package/event
 Source0:	event-%{version}.tar.bz2
+Patch0:		event-0.9.1-php54x.diff
 BuildRequires:	php-devel >= 3:5.2.0
 Epoch:		1
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -24,6 +25,8 @@ identical.
 %prep
 
 %setup -q -n event-%{version}
+
+%patch0 -p0
 
 %build
 %serverbuild
