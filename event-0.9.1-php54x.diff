@@ -1,0 +1,11 @@
+--- event.c	2004-12-16 06:33:36.000000000 +0100
++++ event.c.oden	2012-05-06 13:35:54.845652294 +0200
+@@ -44,7 +44,7 @@ static int le_event;
+ #define event_from_zval(e, z) ZEND_FETCH_RESOURCE(e, struct php_event*, &z, -1, "event", le_event);
+ 
+ /* {{{ event_functions[] */
+-function_entry event_functions[] = {
++zend_function_entry event_functions[] = {
+ 	PHP_FE(event_init, NULL)
+ 	PHP_FE(event_have_events, NULL)
+ 	PHP_FE(event_dispatch, NULL)
